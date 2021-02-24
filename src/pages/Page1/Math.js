@@ -1,7 +1,7 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, incrementAction } from "redux/actions/appActions";
+import { increment } from "redux/actions/appActions";
 
 export const Math = () => {
   const { counter } = useSelector((state) => state.app);
