@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Typography,
   Grid,
@@ -7,8 +7,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
-import { ArrowForwardOutlined as ArrowForwardIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { ArrowForwardOutlined as ArrowForwardIcon } from '@material-ui/icons';
 // import { makeStyles } from "@material-ui/core";
 
 // const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ import { ArrowForwardOutlined as ArrowForwardIcon } from "@material-ui/icons";
 //   },
 // }));
 
-export const UserList = ({users}) => {
+export const UserList = ({ users }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
@@ -51,5 +51,5 @@ export const UserList = ({users}) => {
 };
 
 UserList.propTypes = {
-    users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };

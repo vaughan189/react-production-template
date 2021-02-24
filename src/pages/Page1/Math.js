@@ -1,7 +1,7 @@
-import { Button, Grid, Typography } from "@material-ui/core";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { increment } from "redux/actions/appActions";
+import { Button, Grid, Typography } from '@material-ui/core';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from 'redux/actions/appActions';
 
 export const Math = () => {
   const { counter } = useSelector((state) => state.app);
@@ -13,7 +13,7 @@ export const Math = () => {
     dispatch(increment(5));
   };
   const subtract = () => {
-    dispatch({ type: "DECREMENT" });
+    dispatch({ type: 'DECREMENT' });
   };
   return (
     <>

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { DashboardView } from "./DashboardView";
-import { Link } from "react-router-dom";
-import { ROOT } from "navigation/CONSTANTS";
-import { UserList } from "./UserList";
-import {
-  CircularProgress,
-  Typography,
-} from "@material-ui/core";
-import { getAllUsers } from "services";
+import React, { useEffect, useState } from 'react';
+import { DashboardView } from './DashboardView';
+import { Link } from 'react-router-dom';
+import { ROOT } from 'navigation/CONSTANTS';
+import { UserList } from './UserList';
+import { CircularProgress, Typography } from '@material-ui/core';
+import { getAllUsers } from 'services';
 
 export const DashboardContainer = () => {
   const [users, setUsers] = useState([]);
@@ -17,18 +14,18 @@ export const DashboardContainer = () => {
     setIsLoading(true);
     getAllUsers()
       .then((res) => {
-        console.log("Dashboard > getAllUsers > res=", res);
+        console.log('Dashboard > getAllUsers > res=', res);
         setUsers(res);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("axios err=", err);
+        console.log('axios err=', err);
         setUsers([]);
         setIsLoading(false);
       });
 
     return () => {
-      console.log("axios cleanup.");
+      console.log('axios cleanup.');
     };
   }, []);
 

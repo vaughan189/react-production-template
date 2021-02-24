@@ -1,11 +1,11 @@
-import React from "react";
-import { ROOT } from "navigation/CONSTANTS";
-import { Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { useAuth } from "navigation/Auth/ProvideAuth";
+import React from 'react';
+import { ROOT } from 'navigation/CONSTANTS';
+import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useAuth } from 'navigation/Auth/ProvideAuth';
 
 export const AuthorizedPage1 = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   return (
     <div>
       <Link to={ROOT}>Home</Link>

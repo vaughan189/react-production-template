@@ -11,11 +11,7 @@ const authContext = createContext();
 // Context Provider to wrap the whole app within and make auth information available.
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  return (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  );
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
 // Custom hook to access auth related data and methods.
