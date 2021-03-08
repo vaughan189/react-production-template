@@ -40,7 +40,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             React Boilerplate Template
           </Typography>
-          <Btn text="Login / Logout" onClick={Auth.signOut()} />
+          <Btn text="Login / Logout" onClick={() => Auth.signOut()} />
         </Toolbar>
       </AppBar>
     </div>

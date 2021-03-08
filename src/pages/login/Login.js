@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,40 +13,55 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import useStyles from './Style';
 import Copyright from '../../components/Copyright/Copyright';
 import History from '../../routes/History';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import * as userActions from '../../store/Login/Action';
 
 export default function Login() {
   const classes = useStyles();
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  const { email, password } = inputs;
+
+  const loggingIn = useSelector((state) => state.loggingIn);
+
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(userActions.logout());
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+    e.preventDefault();
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setSubmitted(true);
+    if (email && password) {
+      // get return url from location state or default to home page
+      // const { from } = location.state || { from: { pathname: '/' } };
+      dispatch(userActions.login(email, password));
+    }
+  }
 
   // this method is only to trigger route guards , remove and use your own logic
-  const handleLogin = () => {
-    localStorage.setItem('token', 'token');
-    History.push('/');
-  };
+  // const handleLogin = () => {
+  //   localStorage.setItem('token', 'token');
+  //   History.push('/');
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,7 +73,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} name="form" onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -66,7 +84,11 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
+          {submitted && !email && (
+            <div className="invalid-feedback">Email is required</div>
+          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -77,18 +99,25 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
+          {submitted && !password && (
+            <div className="invalid-feedback">Password is required</div>
+          )}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleLogin}
           >
+            {loggingIn && (
+              <span className="spinner-border spinner-border-sm mr-1"></span>
+            )}
             Sign In
           </Button>
           <Grid container>

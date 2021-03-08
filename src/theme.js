@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { indigo, pink } from '@material-ui/core/colors';
 
 import App from './pages/App';
 
@@ -10,10 +11,10 @@ function ThemeApp() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#1976d2',
+        main: indigo[800],
       },
       secondary: {
-        main: '#ac4556',
+        main: pink[500],
       },
     },
   });

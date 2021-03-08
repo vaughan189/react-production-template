@@ -7,7 +7,7 @@ class Home extends React.Component {
       <>
         <Navbar />
         <div className="container my-5">
-          <p>{'message.home.content'}</p>
+          <p>Home Page</p>
         </div>
       </>
     );
