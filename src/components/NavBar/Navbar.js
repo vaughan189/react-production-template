@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { Btn } from '../Controls/Button/Button';
 
-import Auth from '../../utils/Auth';
+import * as userActions from '../../state/Login/Action';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(userActions.logout());
+  }
 
   return (
     <div className={classes.root}>
@@ -40,7 +46,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             React Boilerplate Template
           </Typography>
-          <Btn text="Login / Logout" onClick={() => Auth.signOut()} />
+          <Btn text="Logout" handleClick={logout} />
         </Toolbar>
       </AppBar>
     </div>

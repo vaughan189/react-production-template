@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,9 +16,8 @@ import Container from '@material-ui/core/Container';
 
 import useStyles from './Style';
 import Copyright from '../../components/Copyright/Copyright';
-import History from '../../routes/History';
 
-import * as userActions from '../../store/Login/Action';
+import * as userActions from '../../state/Login/Action';
 
 export default function Login() {
   const classes = useStyles();
@@ -34,7 +32,6 @@ export default function Login() {
   const loggingIn = useSelector((state) => state.loggingIn);
 
   const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(userActions.logout());
@@ -51,17 +48,9 @@ export default function Login() {
 
     setSubmitted(true);
     if (email && password) {
-      // get return url from location state or default to home page
-      // const { from } = location.state || { from: { pathname: '/' } };
       dispatch(userActions.login(email, password));
     }
   }
-
-  // this method is only to trigger route guards , remove and use your own logic
-  // const handleLogin = () => {
-  //   localStorage.setItem('token', 'token');
-  //   History.push('/');
-  // };
 
   return (
     <Container component="main" maxWidth="xs">

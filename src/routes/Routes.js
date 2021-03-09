@@ -10,6 +10,7 @@ import history from './History';
 import * as LazyComponent from '../utils/LazyLoaded';
 import Loader from '../components/Loader/Loader';
 import PrivateRoute from '../utils/PrivateRoute';
+import PublicRoute from '../utils/PublicRoute';
 
 const Routes = () => {
   // const location = useLocation();
@@ -21,7 +22,8 @@ const Routes = () => {
     <Suspense fallback={<Loader />}>
       <Router history={history}>
         <Switch>
-          <LazyComponent.Login path="/login" exact />
+          {/* <LazyComponent.Login path="/login" exact /> */}
+          <PublicRoute component={LazyComponent.Login} path="/login" exact />
           <PrivateRoute component={LazyComponent.Home} path="/home" exact />
           <Redirect from="**" to={`/home`} exact />
         </Switch>

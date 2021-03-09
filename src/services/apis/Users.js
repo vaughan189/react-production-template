@@ -15,11 +15,12 @@ const login = async (username, password) => {
   // store user details and jwt token in local storage to keep user logged in between page refreshes
   localStorage.setItem('user', JSON.stringify(user.data));
   localStorage.setItem('token', user.token);
-  return user;
+  return user.data;
 };
 
 const logout = () => {
   localStorage.removeItem('user');
+  localStorage.removeItem('token');
 };
 
 // function getAll() {

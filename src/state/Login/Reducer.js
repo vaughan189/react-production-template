@@ -1,7 +1,7 @@
 import * as types from './Types';
 
-const USER = JSON.parse(localStorage.getItem('user'));
-const INITIAL_STATE = USER ? { loggedIn: true, USER } : {};
+const user = JSON.parse(localStorage.getItem('user'));
+const INITIAL_STATE = user ? { loggedIn: true, user } : {};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

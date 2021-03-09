@@ -1,5 +1,5 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Types';
-import * as userService from '../../network/apis/Users';
+import * as userService from '../../services/apis/Users';
 import History from '../../routes/History';
 
 const login = (username, password) => {
@@ -21,6 +21,7 @@ const login = (username, password) => {
 
 const logout = () => {
   userService.logout();
+  History.push('/login');
   return { type: LOGOUT };
 };
 
