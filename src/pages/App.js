@@ -4,12 +4,12 @@ import history from '../routes/History';
 import Routes from '../routes/Routes';
 
 // import Navbar from '../components/NavBar/Navbar';
-// import { MaterialSnackbar } from '../components/Snackbar/Snackbar';
+import { MaterialSnackbar } from '../components/Snackbar/Snackbar';
 
 function App() {
   return (
     <Router history={history}>
-      {/* <MaterialSnackbar /> */}
+      <MaterialSnackbar />
       <Routes />
     </Router>
   );

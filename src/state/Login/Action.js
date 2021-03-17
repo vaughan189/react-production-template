@@ -2,6 +2,8 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Types';
 import * as userService from '../../services/apis/Users';
 import History from '../../routes/History';
 
+import { showSnackbarAction } from '../../state/SnackBar/Action';
+
 const login = (username, password) => {
   return (dispatch) => {
     dispatch(request({ username }));
@@ -13,7 +15,7 @@ const login = (username, password) => {
       },
       (error) => {
         dispatch(failure(error.toString()));
-        // dispatch(alertActions.error(error.toString()));
+        dispatch(showSnackbarAction(error, 'error'));
       }
     );
   };
