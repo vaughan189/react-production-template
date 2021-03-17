@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container';
 import useStyles from './Style';
 import Copyright from '../../components/Copyright/Copyright';
 
-import * as userActions from '../../state/Login/Action';
+import { login, logout } from '../../state/Actions';
 
 export default function Login() {
   const classes = useStyles();
@@ -34,7 +34,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.logout());
+    dispatch(logout());
   }, []);
 
   const handleChange = (e) => {
@@ -48,7 +48,7 @@ export default function Login() {
 
     setSubmitted(true);
     if (email && password) {
-      dispatch(userActions.login(email, password));
+      dispatch(login(email, password));
     }
   }
 

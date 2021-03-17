@@ -2,7 +2,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Types';
 import * as userService from '../../services/apis/Users';
 import History from '../../routes/History';
 
-import { showSnackbarAction } from '../../state/SnackBar/Action';
+import { showSnackbarAction } from '../../state/Actions';
 
 const login = (username, password) => {
   return (dispatch) => {
