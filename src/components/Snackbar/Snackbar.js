@@ -35,10 +35,10 @@ export function MaterialSnackbar(_props) {
     <div className={classes.root}>
       <Snackbar
         open={isOpen}
-        autoHideDuration={3000}
+        autoHideDuration={6000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         key={`bottom,center`}
-        onClose={() => handleClose}
+        onClose={handleClose}
       >
         <Alert onClose={handleClose} severity={type} className="medium_font">
           {message}
