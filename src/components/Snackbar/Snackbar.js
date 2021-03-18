@@ -35,7 +35,7 @@ export function MaterialSnackbar(_props) {
     <div className={classes.root}>
       <Snackbar
         open={isOpen}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         key={`bottom,center`}
         onClose={handleClose}

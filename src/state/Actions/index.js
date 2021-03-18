@@ -1,4 +1,4 @@
-import { login, logout } from '../Login/Action';
-import { showSnackbarAction, hideSnackbarAction } from '../SnackBar/Action';
+import * as LoginActions from '../Login/Action';
+import * as SnackbarActions from '../SnackBar/Action';
 
-export { login, logout, showSnackbarAction, hideSnackbarAction };
+export { LoginActions, SnackbarActions };

@@ -1,8 +1,13 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Types';
+import {
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
+  USER_LOGOUT_REQUEST,
+} from './Types';
 import * as userService from '../../services/apis/Users';
 import History from '../../routes/History';
 
-import { showSnackbarAction } from '../../state/Actions';
+import { SnackbarActions } from '../../state/Actions';
 
 const login = (username, password) => {
   return (dispatch) => {
@@ -15,7 +20,7 @@ const login = (username, password) => {
       },
       (error) => {
         dispatch(failure(error.toString()));
-        dispatch(showSnackbarAction(error, 'error'));
+        dispatch(SnackbarActions.showSnackbarAction(error, 'error'));
       }
     );
   };
@@ -24,17 +29,17 @@ const login = (username, password) => {
 const logout = () => {
   userService.logout();
   History.push('/login');
-  return { type: LOGOUT };
+  return { type: USER_LOGOUT_REQUEST };
 };
 
 const request = (user) => {
-  return { type: LOGIN_REQUEST, user };
+  return { type: USER_LOGIN_REQUEST, user };
 };
 const success = (user) => {
-  return { type: LOGIN_SUCCESS, user };
+  return { type: USER_LOGIN_SUCCESS, user };
 };
 const failure = (error) => {
-  return { type: LOGIN_FAILURE, error };
+  return { type: USER_LOGIN_FAILURE, error };
 };
 
 export { login, logout };
