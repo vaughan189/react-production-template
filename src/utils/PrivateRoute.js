@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Auth from '../utils/Auth';
+import { isAuth } from '../utils/Auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        Auth.isAuth() ? <Component {...props} /> : <Redirect to={`/login`} />
+        isAuth() ? <Component {...props} /> : <Redirect to={`/login`} />
       }
     />
   );

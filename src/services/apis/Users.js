@@ -1,4 +1,4 @@
-// import { authHeader } from '../_helpers';
+import { logout, authHeader } from '../../utils/Auth';
 
 const login = async (username, password) => {
   const requestOptions = {
@@ -18,75 +18,74 @@ const login = async (username, password) => {
   return user.data;
 };
 
-const logout = () => {
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
+const getAllUsers = async () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`/users`, requestOptions).then(handleResponse);
 };
 
-// function getAll() {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: authHeader(),
-//   };
+const getUserById = async (id) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader(),
+  };
 
-//   return fetch(`/users`, requestOptions).then(handleResponse);
-// }
+  return fetch(
+    `${process.env.REACT_APP_API_URL}/users/${id}`,
+    requestOptions
+  ).then(handleResponse);
+};
 
-// function getById(id) {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: authHeader(),
-//   };
+const registerUser = async (user) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  };
 
-//   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
-//     handleResponse
-//   );
-// }
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/users/register`,
+    requestOptions
+  );
+  return handleResponse(response);
+};
 
-// function register(user) {
-//   const requestOptions = {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(user),
-//   };
+const updateUser = async (user) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  };
 
-//   return fetch(`${config.apiUrl}/users/register`, requestOptions).then(
-//     handleResponse
-//   );
-// }
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/users/${user.id}`,
+    requestOptions
+  );
+  return handleResponse(response);
+};
 
-// function update(user) {
-//   const requestOptions = {
-//     method: 'PUT',
-//     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-//     body: JSON.stringify(user),
-//   };
+const deleteUserById = async (id) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: authHeader(),
+  };
 
-//   return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(
-//     handleResponse
-//   );
-// }
-
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//   const requestOptions = {
-//     method: 'DELETE',
-//     headers: authHeader(),
-//   };
-
-//   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
-//     handleResponse
-//   );
-// }
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/users/${id}`,
+    requestOptions
+  );
+  return handleResponse(response);
+};
 
 function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
     if (!response.ok) {
       if (response.status === 401) {
-        // auto logout if 401 response returned from api
         logout();
-        // location.reload(true);
       }
 
       const error = (data && data.message) || response.statusText;
@@ -97,4 +96,12 @@ function handleResponse(response) {
   });
 }
 
-export { login, logout };
+export {
+  login,
+  logout,
+  getAllUsers,
+  getUserById,
+  registerUser,
+  updateUser,
+  deleteUserById,
+};

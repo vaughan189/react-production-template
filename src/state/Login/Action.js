@@ -7,7 +7,7 @@ import {
 import * as userService from '../../services/apis/Users';
 import History from '../../routes/History';
 
-import { SnackbarActions } from '../../state/Actions';
+import { SnackbarActions } from '../Actions';
 
 const login = (username, password) => {
   return (dispatch) => {

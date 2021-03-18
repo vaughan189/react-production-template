@@ -1,11 +1,19 @@
-// Service to check authentication for user and to signOut
-const Auth = {
-  signOut() {
-    localStorage.removeItem('token');
-  },
-
-  isAuth() {
-    return localStorage.getItem('token');
-  },
+const logout = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
 };
-export default Auth;
+
+const isAuth = () => {
+  return localStorage.getItem('token');
+};
+
+const authHeader = () => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  if (token) {
+    return { Authorization: 'Bearer ' + token };
+  } else {
+    return {};
+  }
+};
+
+export { isAuth, logout, authHeader };
