@@ -8,9 +8,9 @@ const isAuth = () => {
 };
 
 const authHeader = () => {
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = localStorage.getItem('token');
   if (token) {
-    return { Authorization: 'Bearer ' + token };
+    return { Auth: token };
   } else {
     return {};
   }

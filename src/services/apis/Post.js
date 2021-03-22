@@ -1,13 +1,14 @@
-import { logout } from './Shared';
-import { authHeader } from '../../utils/Auth';
+import { authHeader, logout } from '../../utils/Auth';
+import History from '../../routes/History';
 
 const getAll = async () => {
   const requestOptions = {
     method: 'GET',
     headers: authHeader(),
   };
-
-  return fetch(`/posts`, requestOptions).then(handleResponse);
+  return fetch(`${process.env.REACT_APP_API_URL}/post`, requestOptions).then(
+    handleResponse
+  );
 };
 
 const getById = async (id) => {
@@ -17,7 +18,7 @@ const getById = async (id) => {
   };
 
   return fetch(
-    `${process.env.REACT_APP_API_URL}/posts/${id}`,
+    `${process.env.REACT_APP_API_URL}/post/${id}`,
     requestOptions
   ).then(handleResponse);
 };
@@ -29,7 +30,7 @@ const create = async (user) => {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${process.env.REACT_APP_API_URL}/posts`, requestOptions).then(
+  return fetch(`${process.env.REACT_APP_API_URL}/post`, requestOptions).then(
     handleResponse
   );
 };
@@ -42,7 +43,7 @@ const updateById = async (user) => {
   };
 
   return fetch(
-    `${process.env.REACT_APP_API_URL}/posts/${user.id}`,
+    `${process.env.REACT_APP_API_URL}/post/${user.id}`,
     requestOptions
   ).then(handleResponse);
 };
@@ -54,7 +55,7 @@ const deleteById = async (id) => {
   };
 
   return fetch(
-    `${process.env.REACT_APP_API_URL}/posts/${id}`,
+    `${process.env.REACT_APP_API_URL}/post/${id}`,
     requestOptions
   ).then(handleResponse);
 };
@@ -65,12 +66,11 @@ const handleResponse = async (response) => {
     if (!response.ok) {
       if (response.status === 401) {
         logout();
+        History.push('/login');
       }
-
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-
     return data;
   });
 };
