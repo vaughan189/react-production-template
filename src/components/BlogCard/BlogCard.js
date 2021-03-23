@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BlogTile({ post }) {
+const BlogCard = ({ post }) => {
   const classes = useStyles();
 
   return (
@@ -37,13 +37,15 @@ export default function BlogTile({ post }) {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            Share
+            EDIT
           </Button>
           <Button size="small" color="primary">
-            Learn More
+            DELETE
           </Button>
         </CardActions>
       </Card>
     </div>
   );
-}
+};
+
+export default BlogCard;

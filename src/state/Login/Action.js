@@ -10,7 +10,7 @@ import History from '../../routes/History';
 import { SnackbarActions } from '../Actions';
 
 const login = (username, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(request({ username }));
 
     userService.login(username, password).then(
