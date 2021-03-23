@@ -4,6 +4,7 @@ import Navbar from '../../components/NavBar/Navbar';
 import BlogTile from '../../components/Card/Card';
 
 import { HomeActions } from '../../state/Actions';
+import Loader from '../../components/Loader/Loader';
 
 export default function Home() {
   const posts = useSelector((state) => state.Home);
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {posts.loading && <em>Loading posts...</em>}
+      {posts.loading && <Loader />}
       {posts.error && <span className="text-danger">ERROR: {posts.error}</span>}
       {posts.items && (
         <div className="container mx-auto my-5">
