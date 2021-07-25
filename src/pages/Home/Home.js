@@ -6,7 +6,7 @@ import BlogCard from '../../components/BlogCard/BlogCard';
 import { HomeActions } from '../../state/Actions';
 import Loader from '../../components/Loader/Loader';
 
-export default function Home() {
+const Home = () => {
   const posts = useSelector((state) => state.Home);
   const dispatch = useDispatch();
 
@@ -28,4 +28,6 @@ export default function Home() {
       )}
     </>
   );
-}
+};
+
+export default Home;
