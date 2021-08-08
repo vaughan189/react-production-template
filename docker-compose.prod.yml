@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: react-frontend-app-prod
+    image: react-frontend-app-prod
+    # env_file:
+    #   - .env.production
+    build:
+      context: .
+      target: production
